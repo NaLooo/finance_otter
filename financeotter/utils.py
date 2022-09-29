@@ -1,5 +1,3 @@
-from cgitb import reset
-from wsgiref.validate import PartialIteratorWrapper
 import requests
 import re
 import numpy as np

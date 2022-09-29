@@ -24,13 +24,15 @@ class Ticker():
             return instance
 
     def __init__(self, ticker:str) -> None:
-        self._historical_data = pd.read_csv(StringIO(self.request_historical_data.text)).set_index(['Date'])
+        df = pd.read_csv(StringIO(self.request_historical_data.text))
+        df['Date'] = pd.to_datetime(df['Date'])
+        self._historical_data = df.set_index('Date')
 
     # get historical data from start to end, time format: YYYY-MM-DD
     def get_historical_data(self, 
+                            period = 'max',
                             start = None, 
-                            end = None, 
-                            period = 'max'):
+                            end = None):
         span = None
         start_date  = None
         end_date = datetime.now().date()
@@ -53,10 +55,9 @@ class Ticker():
                 case '5y':
                     span = timedelta(days = 365*5)
                 case 'ytd':
-                    span = timedelta()
-                    start_date = datetime.now().date().replace(month = 1, day = 1)
+                    span = end_date - datetime.now().date().replace(month = 1, day = 1)
                 case 'max':
                     return self._historical_data
             start_date = end_date - span
-        
+
         return self._historical_data.loc[str(start_date):str(end_date)]

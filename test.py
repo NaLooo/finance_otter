@@ -1,4 +1,3 @@
-from time import process_time_ns
 import financeotter as otter
 import requests
 import re
@@ -95,12 +94,12 @@ from financeotter.utils import *
 # df.columns = col
 # print(df)
 
+import matplotlib.pyplot as plt
+import mplfinance as mpf
 
 aapl = otter.get_ticker('aapl')
-print(aapl.get_historical_data())
+quotes = aapl.get_historical_data('ytd')
+print(quotes)
 
-
-# for info like isin
-# https://markets.businessinsider.com/ajax/SearchController_Suggest?max_results=25&query=amzn
-
+mpf.plot(quotes)
 
