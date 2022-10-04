@@ -4,6 +4,7 @@ import numpy as np
 
 from pandas import DataFrame
 from bs4 import BeautifulSoup
+
 from .constant import *
 
 def get_isin(ticker: str):
@@ -189,3 +190,12 @@ class FinancialHighlights():
             + 'Cash Flow Statement\n' \
             + str(self.cash_flow_statement)
 
+class Benchmark:
+    def __init__(self) -> None:
+        self.benchmark = None
+    
+    def __call__(self):
+        return self.benchmark
+    
+    def get_historical_data(self, period = 'max', start = None, end = None):
+        return self.benchmark.get_historical_data(period, start, end)

@@ -1,3 +1,4 @@
+from matplotlib import test
 import financeotter as otter
 import requests
 import re
@@ -97,9 +98,9 @@ from financeotter.utils import *
 import matplotlib.pyplot as plt
 import mplfinance as mpf
 
-aapl = otter.get_ticker('aapl')
-quotes = aapl.get_historical_data('ytd')
-print(quotes)
+# aapl = otter.get_ticker('aapl')
+# quotes = aapl.get_historical_data('ytd')
+# print(quotes)
 
-mpf.plot(quotes)
+# mpf.plot(quotes)
 
