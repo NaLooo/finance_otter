@@ -48,8 +48,6 @@ from financeotter.utils import *
 # file.close()
 
 
-
-
 # pattern = re.compile('<h3.*?</table>', re.S)
 
 # file = open('AAPL.txt', 'rb')
@@ -95,12 +93,10 @@ from financeotter.utils import *
 # df.columns = col
 # print(df)
 
-import matplotlib.pyplot as plt
-import mplfinance as mpf
 
-# aapl = otter.get_ticker('aapl')
+aapl = otter.get_ticker('aapl')
+print(aapl.beta)
 # quotes = aapl.get_historical_data('ytd')
 # print(quotes)
 
 # mpf.plot(quotes)
-
