@@ -2,3 +2,4 @@ __pycache__/*
 financeotter/__pycache__/*
 *.txt
 .vscode/
+test*
