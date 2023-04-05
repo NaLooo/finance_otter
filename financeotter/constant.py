@@ -4,6 +4,12 @@ URL_INFO = 'https://finance.yahoo.com/quote/{}/{}'
 URL_QUERY = 'https://query1.finance.yahoo.com/v7/finance/download/{}?period1={}&period2={}&interval=1d&events=history&includeAdjustedClose=true'
 URL_ISIN = 'https://markets.businessinsider.com/ajax/SearchController_Suggest?max_results=25&query={}'
 
+URL_FF3_MONTHLY = 'https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip'
+URL_FF3_DAILY = 'https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_daily_CSV.zip'
+URL_FF5_MONTHLY = 'https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_CSV.zip'
+URL_FF5_DAILY = 'https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_5_Factors_2x3_daily_CSV.zip'
+
+
 INFO_STATISTICS = 'key-statistics'
 INFO_PROFILE = 'profile'
 INFO_INCOME_STATEMENT = 'financials'

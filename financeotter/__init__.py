@@ -1,12 +1,12 @@
 from .ticker_index import Ticker_Index
 from .ticker_stock import Ticker_Stock
-from .models import GRU, LSTM, AR, ARMA
-from .utils import *
+from .utils import get_similar_ticker
+
 
 __version__ = '0.1.0'
 __author__ = "Ming Yu"
 
-benchmark:Benchmark = Benchmark()
+# benchmark:Benchmark = Benchmark()
 _CACHE = {}
 
 def get_ticker(ticker: str):
@@ -26,8 +26,8 @@ def get_ticker(ticker: str):
     _CACHE[ticker] = result
     return result
 
-def set_benchmark(ticker:str = '^GSPC'):
-    benchmark.benchmark = get_ticker(ticker)
+# def set_benchmark(ticker:str = '^GSPC'):
+#     benchmark.benchmark = get_ticker(ticker)
 
 
 

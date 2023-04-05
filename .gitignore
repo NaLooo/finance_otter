@@ -1,5 +1,4 @@
-__pycache__/*
-financeotter/__pycache__/*
+__pycache__*
 *.txt
 .vscode/
 test*
