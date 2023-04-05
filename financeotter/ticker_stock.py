@@ -1,5 +1,3 @@
-from tkinter import N
-from tkinter.messagebox import NO
 from .utils import *
 from .constant import *
 from .ticker import Ticker
@@ -28,6 +26,22 @@ class Ticker_Stock(Ticker):
         if self._summary is None:
             self._summary = get_summary(self.ticker)
         return self._summary
+    
+    @property
+    def current_price(self):
+        return get_current_price(self.ticker)
+
+    @property
+    def current_bid_price(self):
+        if self._summary is None:
+            self._summary = get_summary(self.ticker)
+        return float(self._summary.loc['Bid'][0].split()[0])
+    
+    @property
+    def current_ask_price(self):
+        if self._summary is None:
+            self._summary = get_summary(self.ticker)
+        return float(self._summary.loc['Ask'][0].split()[0])
 
     @property
     def market_cap(self):

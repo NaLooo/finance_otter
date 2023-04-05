@@ -17,7 +17,6 @@ class Ticker():
         instance.request_historical_data = requests.get(URL_QUERY.format(instance.ticker, instance.start_time_stamp, instance.end_time_stamp), headers = HEADERS)
         if(instance.request_historical_data.status_code != 200):
             print('Invalid Ticker: ' + ticker)
-            get_similar_ticker(ticker)
             return None
         else:
             return instance
@@ -25,13 +24,13 @@ class Ticker():
     def __init__(self, ticker:str) -> None:
         df = pd.read_csv(StringIO(self.request_historical_data.text))
         df['Date'] = pd.to_datetime(df['Date'])
-        self._historical_data = df.set_index('Date')
+        self._historical_data = df.set_index('Date').astype('float32')
 
     # get historical data from start to end, time format: YYYY-MM-DD
-    def get_historical_data(self, 
-                            period = 'max',
-                            start = None, 
-                            end = None):
+    def history(self, 
+                period='max',
+                start=None, 
+                end=None):
         span = None
         start_date  = None
         end_date = datetime.now().date()
@@ -42,9 +41,11 @@ class Ticker():
         else:
             match period:
                 case '1d':
-                    return self._historical_data.iloc[-1:]
+                    span = timedelta(days = 1)
                 case '5d':
-                    return self._historical_data.iloc[-5:]
+                    span = timedelta(days = 5)
+                case '1m':
+                    span = timedelta(days = 30)
                 case '3m':
                     span = timedelta(days = 90)
                 case '6m':
@@ -56,7 +57,10 @@ class Ticker():
                 case 'ytd':
                     span = end_date - datetime.now().date().replace(month = 1, day = 1)
                 case 'max':
-                    return self._historical_data
+                    return self._historical_data.copy()
+                case _:
+                    print('illegal period, max historical data is returned instead')
+                    return self._historical_data.copy()
             start_date = end_date - span
 
-        return self._historical_data.loc[str(start_date):str(end_date)]
+        return self._historical_data.loc[str(start_date):str(end_date)].copy()

@@ -8,6 +8,10 @@ from bs4 import BeautifulSoup
 from .constant import *
 
 
+def get_current_price(ticker):
+    soup = get_soup(URL_BASE.format(ticker))
+    return float(soup.find(id='quote-header-info').find(name='fin-streamer').string)
+
 def get_summary(ticker: str):
     soup = get_soup(URL_BASE.format(ticker))
     if not soup:
@@ -53,6 +57,8 @@ def get_similar_ticker(ticker: str):
         print('Similar Ticker: ', list)
     else:
         print('No Similar Ticker Found')
+    
+    return list
 
 
 def get_key_statistics(ticker: str):
