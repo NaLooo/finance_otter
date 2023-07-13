@@ -95,6 +95,9 @@ class ARMA():
         predict = model.predict(test[cols])
         acc = accuracy_score(test['d'], predict)
         print(f'Out Sample | {self.ticker.ticker:5s} | acc={acc:.4f}')
+    
+    def predict(self):
+        self.base_model.predict()
 
 class AR():
     def __init__(self, ticker):

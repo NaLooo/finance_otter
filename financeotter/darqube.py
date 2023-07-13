@@ -16,7 +16,7 @@ class Cursor():
         self.token = token
     
     def history(self, ticker, period='max', start=None, end=None):
-        start_time, end_time = self._process_date(period, start, end)
+        start_time, end_time = self._process_history_date(period, start, end)
         json = re.get(URL_HISTORY.format(ticker.upper(), self.token, start_time, end_time)).text
         df = pd.read_json(StringIO(json))
         df['date'] = pd.DataFrame([datetime.fromtimestamp(t).date() for t in df['time']])
@@ -24,10 +24,10 @@ class Cursor():
 
         return df.dropna().drop('time', axis=1)
     
-    def _process_date(self, period, start, end):
+    def _process_history_date(self, period, start, end):
         span = None
         start_date = None
-        end_date = datetime.now().date()
+        end_date = datetime.now()
         if start is not None:
             start_date = datetime.strptime(start, format='%Y%m%d')
             if end is not None:
@@ -57,5 +57,5 @@ class Cursor():
                     print('illegal period, max historical data is returned instead')
             start_date = end_date - span
         end_date += timedelta(days=1)
-        print(end_date)
+
         return int(mktime(start_date.timetuple())), int(mktime(end_date.timetuple()))
